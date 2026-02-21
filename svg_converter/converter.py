@@ -189,16 +189,16 @@ def convert_trace(img: Image.Image, threshold: int = 128, invert: bool = False) 
     w, h = img.size
     paths_svg = []
     for curve in path:
-        parts = [f"M {curve.start_point.x:.3f} {curve.start_point.y:.3f}"]
+        parts = [f"M {curve.start_point[0]:.3f} {curve.start_point[1]:.3f}"]
         for segment in curve:
             if segment.is_corner:
-                parts.append(f"L {segment.c.x:.3f} {segment.c.y:.3f}")
-                parts.append(f"L {segment.end_point.x:.3f} {segment.end_point.y:.3f}")
+                parts.append(f"L {segment.c[0]:.3f} {segment.c[1]:.3f}")
+                parts.append(f"L {segment.end_point[0]:.3f} {segment.end_point[1]:.3f}")
             else:
                 parts.append(
-                    f"C {segment.c1.x:.3f} {segment.c1.y:.3f} "
-                    f"{segment.c2.x:.3f} {segment.c2.y:.3f} "
-                    f"{segment.end_point.x:.3f} {segment.end_point.y:.3f}"
+                    f"C {segment.c1[0]:.3f} {segment.c1[1]:.3f} "
+                    f"{segment.c2[0]:.3f} {segment.c2[1]:.3f} "
+                    f"{segment.end_point[0]:.3f} {segment.end_point[1]:.3f}"
                 )
         parts.append("Z")
         paths_svg.append(f'  <path d="{" ".join(parts)}" fill="black"/>')
